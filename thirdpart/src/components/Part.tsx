@@ -34,6 +34,14 @@ const Part: React.FC<Props> = ({ coursePart }) => {
       );
       break;
     }
+    case "Zakke's own type": {
+      component = (
+        <p key={coursePart.name}>
+          {coursePart.name} {coursePart.exerciseCount}
+        </p>
+      );
+      break;
+    }
     default:
       assertNever(coursePart);
   }

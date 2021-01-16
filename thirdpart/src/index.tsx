@@ -23,7 +23,11 @@ const App: React.FC = () => {
       exerciseCount: 14,
       description: "Confusing description",
       exerciseSubmissionLink: "https://fake-exercise-submit.made-up-url.dev"
-    }
+    },
+    {
+      name: "Zakke's own type",
+      exerciseCount: 69,
+    },
   ];
   
   return (

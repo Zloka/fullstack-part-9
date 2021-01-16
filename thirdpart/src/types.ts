@@ -21,4 +21,8 @@ interface CoursePartThree extends CoursePartBaseWithDescription {
   exerciseSubmissionLink: string;
 }
 
-export type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
+interface CoursePartFour extends CoursePartBase {
+  name: "Zakke's own type";
+} 
+
+export type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree | CoursePartFour;

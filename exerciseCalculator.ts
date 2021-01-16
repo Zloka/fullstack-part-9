@@ -1,3 +1,21 @@
+const parseExerciseCalculatorArguments = (args: Array<string>): number[] => {
+  if (args.length < 4) throw new Error('Not enough arguments. At least 2 arguments need to be provided');
+
+  const relevantArgs = args.slice(2);
+  const notNumbers = relevantArgs.some(arg => isNaN(Number(arg)));
+  if (notNumbers) {
+    throw new Error('Provided values were not numbers! Please provide only numbers!');
+  }
+
+  const isNegative = relevantArgs.some(arg => Number(arg) < 0);
+  if (isNegative) {
+    throw new Error('Negative numbers do not make sense in this context!');
+  }
+
+  return relevantArgs.map(arg => Number(arg));
+}
+
+
 interface Result {
   periodLength: number;
   trainingDays: number;
@@ -8,7 +26,9 @@ interface Result {
   average: number;
 }
 
-const calculateExercises = (trainingData: number[], target: number): Result => {
+const calculateExercises = (data: number[]): Result => {
+  const target = data[0]; // Fine as long has the arguments have been parsed!
+  const trainingData = data.slice(1);
   const periodLength = trainingData.length;
   const trainingDays = trainingData.filter(trainingDatum => trainingDatum !== 0).length;
   const totalHours = trainingData.reduce((acc, cur) => acc + cur, 0);
@@ -35,4 +55,4 @@ const calculateExercises = (trainingData: number[], target: number): Result => {
   };
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+console.log(calculateExercises(parseExerciseCalculatorArguments(process.argv)));

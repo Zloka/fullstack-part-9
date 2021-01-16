@@ -13,7 +13,7 @@ const parseExerciseCalculatorArguments = (args: Array<string>): number[] => {
   }
 
   return relevantArgs.map(arg => Number(arg));
-}
+};
 
 
 interface Result {
@@ -42,7 +42,7 @@ const calculateExercises = (data: number[]): Result => {
       ? "Great, you hit your target spot on!" 
       : rating === 2 
         ? 'You got close to your target, but can still improve!'
-        : 'You missed your target significantly and your habits will likely need to change!'
+        : 'You missed your target significantly and your habits will likely need to change!';
 
   return {
     periodLength,
@@ -53,6 +53,6 @@ const calculateExercises = (data: number[]): Result => {
     average,
     ratingDescription
   };
-}
+};
 
 console.log(calculateExercises(parseExerciseCalculatorArguments(process.argv)));

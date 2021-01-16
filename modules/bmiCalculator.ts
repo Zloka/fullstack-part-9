@@ -1,4 +1,4 @@
-const calculateBmi = (height: number, weight: number) => {
+const calculateBmi = (height: number, weight: number): string => {
   const heightInMetres = height / 100;
   const bmi = weight / (heightInMetres * heightInMetres);
 
@@ -11,8 +11,8 @@ const calculateBmi = (height: number, weight: number) => {
   } else {
     return "Obesity";
   }
-}
+};
 
 export {
   calculateBmi
-}
+};

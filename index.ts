@@ -9,7 +9,7 @@ app.get('/hello', (_req, res) => {
 
 app.get('/bmi', (req, res) => {
   const { height, weight } = req.query;
-  const invalidArguments = !height || !weight || isNaN(Number(height)) || isNaN(Number(weight));
+  const invalidArguments = !height || !weight || isNaN(Number(height)) || isNaN(Number(weight));
 
   if (invalidArguments) {
     res.status(400).send('Arguments are invalid, expected height and weight to be numbers');

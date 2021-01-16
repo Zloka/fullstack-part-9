@@ -24,6 +24,18 @@ app.get('/api/patients', (_req, res) => {
   res.send(patientsService.getPatients());
 });
 
+app.get('/api/patients/:id', (req, res) => {
+  const { id } = req.params;
+
+  const patient = patientsService.getPatient(id);
+
+  if (patient) {
+    res.json(patient);
+  } else {
+    res.status(404).send("No patient by that id exists");
+  }
+});
+
 app.post('/api/patients', (req, res) => {
   // This line is ignored, as we can't trust external data.
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

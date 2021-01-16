@@ -23,6 +23,14 @@ app.get('/api/patients', (_req, res) => {
   res.send(patientsService.getPatients());
 });
 
+app.post('/api/patients', (req, res) => {
+  const { name, gender, ssn, occupation, dateOfBirth } = req.body;
+  const newPatient = patientsService.addPatient({
+    name, dateOfBirth, occupation, gender, ssn
+  });
+  res.json(newPatient);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

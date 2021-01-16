@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import diagnosisService from './services/diagnosisService';
 import patientsService from './services/patientsService';
+import { newPatientValidator } from './validators/newPatient';
 
 const app = express();
 app.use(express.json());
@@ -24,11 +25,20 @@ app.get('/api/patients', (_req, res) => {
 });
 
 app.post('/api/patients', (req, res) => {
+  // This line is ignored, as we can't trust external data.
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { name, gender, ssn, occupation, dateOfBirth } = req.body;
-  const newPatient = patientsService.addPatient({
+  const newPatientData = {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     name, dateOfBirth, occupation, gender, ssn
-  });
-  res.json(newPatient);
+  };
+
+  if (newPatientValidator(newPatientData)) {
+    const newPatient = patientsService.addPatient(newPatientData);
+    res.json(newPatient);
+  } else {
+    res.status(400).send("Invalid parameters");
+  }
 });
 
 app.listen(PORT, () => {

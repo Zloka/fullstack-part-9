@@ -3,9 +3,12 @@ interface CoursePartBase {
   exerciseCount: number;
 }
 
-interface CoursePartOne extends CoursePartBase {
-  name: "Fundamentals";
+interface CoursePartBaseWithDescription extends CoursePartBase {
   description: string;
+}
+
+interface CoursePartOne extends CoursePartBaseWithDescription {
+  name: "Fundamentals";
 }
 
 interface CoursePartTwo extends CoursePartBase {
@@ -13,9 +16,8 @@ interface CoursePartTwo extends CoursePartBase {
   groupProjectCount: number;
 }
 
-interface CoursePartThree extends CoursePartBase {
+interface CoursePartThree extends CoursePartBaseWithDescription {
   name: "Deeper type usage";
-  description: string;
   exerciseSubmissionLink: string;
 }
 

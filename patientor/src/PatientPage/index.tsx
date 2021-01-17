@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import EntryDetails from '../components/EntryDetails';
 import { apiBaseUrl } from '../constants';
 import { addPatient, useStateValue } from '../state';
 import { Patient } from '../types';
 
 const PatientPage: React.FC = () => {
-  const [{ patients, diagnosis }, dispatch] = useStateValue();
+  const [{ patients }, dispatch] = useStateValue();
   const { id } = useParams<{ id: string }>();
   const patient: Patient | undefined = patients[id];
 
@@ -32,20 +33,13 @@ const PatientPage: React.FC = () => {
       <p>ssn: {patient.ssn}</p>
       <p>occupation: {patient.occupation}</p>
       <h4>entries</h4>
-      {patient.entries.map(entry => {
-        return (
-          <div key={entry.id}>
-            <p>{entry.date} {entry.description}</p>
-            {entry.diagnosisCodes ? (
-              <ul>
-              {entry.diagnosisCodes.map(code => {
-                return <li key={code}>{code} {diagnosis[code] ? diagnosis[code].name : null}</li>;
-              })}
-              </ul>
-            ) : null}
-          </div>
-        );
-      })}
+      <div className="ui relaxed list">
+        {patient.entries.map(entry => {
+          return (
+            <EntryDetails key={entry.id} entry={entry}/>
+          );
+        })}
+      </div>
     </>
   );
 };

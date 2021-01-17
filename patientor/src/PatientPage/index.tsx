@@ -6,7 +6,7 @@ import { addPatient, useStateValue } from '../state';
 import { Patient } from '../types';
 
 const PatientPage: React.FC = () => {
-  const [{ patients }, dispatch] = useStateValue();
+  const [{ patients, diagnosis }, dispatch] = useStateValue();
   const { id } = useParams<{ id: string }>();
   const patient: Patient | undefined = patients[id];
 
@@ -39,7 +39,7 @@ const PatientPage: React.FC = () => {
             {entry.diagnosisCodes ? (
               <ul>
               {entry.diagnosisCodes.map(code => {
-                return <li key={code}>{code}</li>;
+                return <li key={code}>{code} {diagnosis[code] ? diagnosis[code].name : null}</li>;
               })}
               </ul>
             ) : null}

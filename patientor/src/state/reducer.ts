@@ -13,6 +13,10 @@ export type Action =
   | {
     type: "SET_DIAGNOSIS_LIST";
     payload: Diagnosis[];
+    }
+  | {
+    type: "SET_PATIENT";
+    payload: Patient;
   };
 
 export const reducer = (state: State, action: Action): State => {
@@ -45,6 +49,15 @@ export const reducer = (state: State, action: Action): State => {
             (memo, diagnose) => ({ ...memo, [diagnose.code]: diagnose }),
             {}
           ),
+        }
+      };
+    case "SET_PATIENT":
+      const patient = action.payload;
+      return {
+        ...state,
+        patients: {
+          ...state.patients,
+          [patient.id]: patient,
         }
       };
     default:
